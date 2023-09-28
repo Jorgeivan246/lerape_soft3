@@ -1,6 +1,7 @@
 package com.lerapeSoft.entidades;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.io.Serializable;
@@ -17,18 +18,29 @@ public class Receta implements Serializable {
     @EqualsAndHashCode.Include
     private Long id;
 
-
+    @Column(nullable=false)
     private String nombre;
 
-
+    @Column(nullable=false)
     private String ingrediente;
 
+    @Column(nullable=false)
     private StringBuilder descripcion;
 
+    @Column(nullable=false)
     private StringBuilder preparacion;
 
-    private String tiempoPreparacion;
 
+    @Column(nullable=false)
+    @Positive
+    private Integer tiempoPreparacion;
+
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    Usuario usuario;
+
+    @Column(nullable=false)
     @Enumerated(EnumType.STRING)
     private  Dificultad dificultad;
 

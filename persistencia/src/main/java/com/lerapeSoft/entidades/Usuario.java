@@ -12,21 +12,29 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Usuario implements Serializable {
+public class Usuario<mappedBy> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
 
+    @Column(nullable=false)
     private String nombre;
 
+    @Column(nullable=false)
     private String contraseña;
 
     @EqualsAndHashCode.Include
+    @Column(unique=true,nullable=false)
     private String correoElectronico;
 
     @ElementCollection
+    @Column(nullable=false)
+    @JoinColumn(nullable = false)
     private List<String> patologias;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Receta> recetas;
 
     @Override
     public boolean equals(Object o) {

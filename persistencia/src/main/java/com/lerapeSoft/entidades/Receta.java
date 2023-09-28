@@ -16,7 +16,7 @@ public class Receta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private Long id;
+    private Integer id;
 
     @Column(nullable=false)
     private String nombre;

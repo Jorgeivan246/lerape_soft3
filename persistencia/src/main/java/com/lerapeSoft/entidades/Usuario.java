@@ -1,10 +1,12 @@
 package com.lerapeSoft.entidades;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,21 +14,31 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class Usuario<mappedBy> implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private Integer id;
 
     @Column(nullable=false)
+    @NotBlank(message = "Debe de escribir nombre")
     private String nombre;
 
-    @Column(nullable=false)
-    private String contraseña;
+
+
 
     @EqualsAndHashCode.Include
-    @Column(unique=true,nullable=false)
-    private String correoElectronico;
+    @Email(message = "El correo electrónico no es válido")
+    @NotBlank(message = "Debe de escribir su correo electrónico")
+    @Column(length = 150, nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable=false)
+    @NotBlank(message = "Debe de escribir su contraseña")
+    private String password;
 
     @ElementCollection
     @Column(nullable=false)
@@ -41,18 +53,13 @@ public class Usuario<mappedBy> implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Usuario usuario = (Usuario) o;
+        Usuario<?> usuario = (Usuario<?>) o;
 
-        if (!id.equals(usuario.id)) return false;
-        return correoElectronico.equals(usuario.correoElectronico);
+        return id.equals(usuario.id);
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + correoElectronico.hashCode();
-        return result;
+        return id.hashCode();
     }
-
-
 }

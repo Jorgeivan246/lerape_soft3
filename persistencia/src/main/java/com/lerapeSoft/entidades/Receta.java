@@ -11,10 +11,12 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class Receta implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer id;
 
@@ -37,7 +39,7 @@ public class Receta implements Serializable {
 
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    //@JoinColumn(nullable = false)
     Usuario usuario;
 
     @Column(nullable=false)

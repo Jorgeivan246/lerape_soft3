@@ -21,7 +21,7 @@ public class Usuario<mappedBy> implements Serializable {
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
-    private Integer id;
+    private String id;
 
     @Column(nullable=false)
     @NotBlank(message = "Debe de escribir nombre")

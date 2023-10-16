@@ -16,7 +16,11 @@
 	<description>Proyecto software 3</description>
 	<modules>
 		<module>persistencia</module>
-	</modules>
+
+		<module>negocio</module>
+		<module>negocio</module>
+
+    </modules>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

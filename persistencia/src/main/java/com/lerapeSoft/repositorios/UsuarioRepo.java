@@ -9,7 +9,7 @@ import java.util.Optional;
 
 
 @Repository
-public interface UsuarioRepo extends JpaRepository<Usuario,Integer> {
+public interface UsuarioRepo extends JpaRepository<Usuario,String> {
 
     List<Usuario> findAllByNombre(String nombre);
 

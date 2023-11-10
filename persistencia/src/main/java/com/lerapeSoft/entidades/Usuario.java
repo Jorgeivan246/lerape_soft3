@@ -16,7 +16,7 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Usuario<mappedBy> implements Serializable {
+public class Usuario implements Serializable {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -45,7 +45,7 @@ public class Usuario<mappedBy> implements Serializable {
     @JoinColumn(nullable = false)
     private List<String> patologias;
 
-    @OneToMany(mappedBy = "usuario")
+    @ManyToMany(mappedBy = "usuarios")
     private List<Receta> recetas;
 
     @Override
@@ -53,7 +53,7 @@ public class Usuario<mappedBy> implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Usuario<?> usuario = (Usuario<?>) o;
+        Usuario usuario = (Usuario) o;
 
         return id.equals(usuario.id);
     }

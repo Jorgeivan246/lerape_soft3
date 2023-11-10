@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @ToString
@@ -18,7 +19,7 @@ public class Receta implements Serializable {
     @Id
    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private Long id;
+    private String id;
 
     @Column(nullable=false)
     private String nombre;
@@ -32,15 +33,17 @@ public class Receta implements Serializable {
     @Column(nullable=false)
     private StringBuilder preparacion;
 
+    @ElementCollection
+    private List<String> patologias;
 
     @Column(nullable=false)
     @Positive
     private Integer tiempoPreparacion;
 
 
-    @ManyToOne
+    @ManyToMany
     //@JoinColumn(nullable = false)
-    Usuario usuario;
+    List<Usuario> usuarios;
 
     @Column(nullable=false)
     @Enumerated(EnumType.STRING)

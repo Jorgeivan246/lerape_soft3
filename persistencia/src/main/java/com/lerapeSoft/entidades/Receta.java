@@ -33,16 +33,20 @@ public class Receta implements Serializable {
     @Column(nullable=false)
     private StringBuilder preparacion;
 
-    @ElementCollection
-    private List<String> patologias;
+    @ManyToMany
+    private List<Patologia> patologias;
 
     @Column(nullable=false)
     @Positive
     private Integer tiempoPreparacion;
 
+    @Column(nullable=false)
+    private String enlaceImagen;
+
 
     @ManyToMany
     //@JoinColumn(nullable = false)
+    @JoinTable(name="recetas_favoritas")
     List<Usuario> usuarios;
 
     @Column(nullable=false)

@@ -28,11 +28,10 @@ public class Patologia implements Serializable {
     private StringBuilder descripcion;
 
     @ManyToMany(mappedBy = "patologias")
-
     private List<Receta> recetas;
 
     @ManyToMany
-    @JoinColumn(name="patologias_del_usuario")
+    @JoinTable(name="patologias_del_usuario")
     private List<Usuario> usuarios;
 
 }

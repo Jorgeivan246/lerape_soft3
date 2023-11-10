@@ -26,7 +26,7 @@ public class UsuarioRestController {
 
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/obtener/{id}")
     public ResponseEntity obtenerUsuario(@PathVariable("id") String idUsuario) {
 
         try {

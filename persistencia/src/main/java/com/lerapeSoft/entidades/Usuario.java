@@ -40,13 +40,12 @@ public class Usuario implements Serializable {
     @NotBlank(message = "Debe de escribir su contraseña")
     private String password;
 
-    @ElementCollection
-    @Column(nullable=false)
-    @JoinColumn(nullable = false)
-    private List<String> patologias;
 
     @ManyToMany(mappedBy = "usuarios")
     private List<Receta> recetas;
+
+    @ManyToMany(mappedBy = "usuarios")
+    private List<Patologia> patologias;
 
     @Override
     public boolean equals(Object o) {

@@ -15,4 +15,7 @@ public interface RecetaRepo extends JpaRepository <Receta,String> {
         @Query("SELECT re FROM Receta re WHERE re.nombre like concat('%',:nombre,'%')")
         Optional<Receta> obtenerRecetaPorNombre(String nombre);
 
+
+
+        Optional<Receta> findByNombre(String nombre);
 }

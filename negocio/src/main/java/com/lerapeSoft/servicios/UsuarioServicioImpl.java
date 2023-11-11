@@ -3,12 +3,9 @@ package com.lerapeSoft.servicios;
 import com.lerapeSoft.entidades.Usuario;
 import com.lerapeSoft.repositorios.UsuarioRepo;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 @Service
 public class UsuarioServicioImpl implements UsuarioServicio {
@@ -27,10 +24,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public Usuario registrarUsuario(Usuario u) throws Exception {
-        Optional<Usuario> buscado = usuarioRepo.findById(u.getId());
-        if (buscado.isPresent()) {
-            throw new Exception("La cedula ya se encuentra en uso");
-        }
+        Optional<Usuario> buscado = usuarioRepo.findByEmail(u.getEmail());
+
         if (!estaDisponible(u.getEmail())) {
             throw new Exception("El email ya se encuentra en uso");
         }
@@ -38,11 +33,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public Usuario otenerUsuario(String id) throws Exception {
-        System.out.println("El id es "+ id);
-        Optional<Usuario> usuario = usuarioRepo.findById(id);
+    public Usuario otenerUsuario(String email) throws Exception {
+
+        Optional<Usuario> usuario = usuarioRepo.findByEmail(email);
         if (usuario.isEmpty()) {
-            throw new Exception("No existe un usuario con el id dado");
+            throw new Exception("No existe un usuario con el email dado");
         }
         return usuario.get();
 
@@ -57,27 +52,25 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     public Usuario login(String email, String password) throws Exception {
         Optional<Usuario> usuario = Optional.ofNullable(usuarioRepo.findByEmailAndPassword(email, password));
 
-            if (usuario.isEmpty())
-            {
-                throw new Exception("El usuario no existe");
-            }
+        if (usuario.isEmpty()) {
+            throw new Exception("El usuario no existe");
+        }
 
-          return usuario.get();
+        return usuario.get();
 
     }
 
     @Override
-    public void eliminarUsuario(String id) throws Exception {
-        Optional<Usuario> usuario = usuarioRepo.findById(id);
+    public void eliminarUsuario(String email) throws Exception {
+        Optional<Usuario> usuario = usuarioRepo.findById(email);
         if (usuario.isEmpty()) {
-            throw new Exception("No existe un usuario con el id dado");
-        }else{
-            usuarioRepo.deleteById(id);
+            throw new Exception("No existe un usuario con el email dado");
+        } else {
+            usuarioRepo.deleteById(email);
         }
 
 
     }
-
 
 
     @Override

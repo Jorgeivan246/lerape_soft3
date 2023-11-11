@@ -21,16 +21,16 @@ public class UsuarioRestController {
 
     @GetMapping
     public ResponseEntity listar() {
-       List<Usuario> listaUsuarios= usuarioServicio.listarUsuario();
+        List<Usuario> listaUsuarios = usuarioServicio.listarUsuario();
         return ResponseEntity.status(200).body(listaUsuarios);
 
     }
 
     @GetMapping("/obtener/{id}")
-    public ResponseEntity obtenerUsuario(@PathVariable("id") String idUsuario) {
+    public ResponseEntity obtenerUsuario(@PathVariable("id") String email) {
 
         try {
-            Usuario usuario = usuarioServicio.otenerUsuario(idUsuario);
+            Usuario usuario = usuarioServicio.otenerUsuario(email);
             return ResponseEntity.status(200).body(usuario);
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
@@ -38,10 +38,10 @@ public class UsuarioRestController {
     }
 
     @PostMapping
-    public ResponseEntity<Mensaje> crearUsuario(@RequestBody Usuario usuario)  {
+    public ResponseEntity<Mensaje> crearUsuario(@RequestBody Usuario usuario) {
 
         try {
-             usuarioServicio.registrarUsuario(usuario);
+            usuarioServicio.registrarUsuario(usuario);
             return ResponseEntity.status(200).body(new Mensaje("El usuario se creo correctamente"));
 
         } catch (Exception e) {
@@ -55,10 +55,10 @@ public class UsuarioRestController {
     @PostMapping("/actualizar")
     public ResponseEntity<Mensaje> actualizarUsuario(@RequestBody Usuario usuario) throws Exception {
 
-        try{
+        try {
             usuarioServicio.actualizarUsuario(usuario);
             return ResponseEntity.status(200).body(new Mensaje("El usuario se actualizo correctamente"));
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
         }
 
@@ -66,14 +66,13 @@ public class UsuarioRestController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Mensaje> eliminar(@PathVariable("id") String id) {
+    public ResponseEntity<Mensaje> eliminar(@PathVariable("id") String email) {
 
 
-        try{
-            usuarioServicio.eliminarUsuario(id);
+        try {
+            usuarioServicio.eliminarUsuario(email);
             return ResponseEntity.status(200).body(new Mensaje("El usuario se eliminó correctamente"));
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             return ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
         }
 

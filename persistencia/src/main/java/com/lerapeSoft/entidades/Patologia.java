@@ -19,7 +19,7 @@ public class Patologia implements Serializable {
     @Id
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private Long id;
+    private String id;
 
     @Column(nullable=false)
     private String nombre;

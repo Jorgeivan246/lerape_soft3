@@ -21,11 +21,28 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
     Usuario findByEmailAndPassword(String correo, String password);
 
 
-    @Query(nativeQuery = true, value = "select * from receta r")
-    List<Receta> obtenerRecetasRecomendadas11(String idUsuario);
 
 
-    @Query("SELECT re FROM Receta re JOIN re.usuarios u WHERE u.id = :idUsuario and u.patologias IN ( SELECT pt from Receta r join r.patologias pt ) ")
+    @Query("SELECT re FROM Usuario u JOIN u.recetas re WHERE u.email = :email")
+    Optional<Receta> obtenerRecetasFavoritasUsuario(String email);
+/*
+
+    @Query("SELECT FROM WHERE ")
+    List<Receta> obtenerRecetasRecomendadas(String);
+
+
+
+
+
+
+
+    @Query("SELECT r FROM Receta r JOIN r.patologias pt WHERE r.patologias IN (SELECT pt FROM Usuario u JOIN u.patologias pt WHERE u.email = :email ) ")
+    List<Receta> obtenerRecetasRecomendadas(String email);
+
+
+    @Query(nativeQuery = true, value = "     SELECT r  FROM receta as r INNER JOIN receta_patologias as rp ON r.id=rp.recetas_id  INNER JOIN patologia p ON rp.patologias_id=p.id WHERE p IN( SELECT p FROM Usuario as u INNER JOIN patologias_del_usuario as pu ON u.id=usuarios_id INNER JOIN patologia p ON pu.patologias_id=p.id WHERE u.email = :email)   ")
     List<Receta> obtenerRecetasRecomendadas(String idUsuario);
+
+    */
 
 }

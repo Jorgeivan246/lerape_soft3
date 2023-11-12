@@ -1,6 +1,7 @@
 package com.lerapeSoft.rest;
 
 import com.lerapeSoft.dto.Mensaje;
+import com.lerapeSoft.entidades.Receta;
 import com.lerapeSoft.entidades.Usuario;
 import com.lerapeSoft.servicios.UsuarioServicio;
 import lombok.AllArgsConstructor;
@@ -78,5 +79,15 @@ public class UsuarioRestController {
 
     }
 
+/**
+    @GetMapping("/recetas/recomendadas/{id}")
+    public ResponseEntity listarRecetasRecomendadas(@PathVariable("id") String email)
+    {
 
+        List<Receta> listaRecetas = usuarioServicio.obtenerRecetasRecomendadas(email);
+
+        return ResponseEntity.status(200).body(listaRecetas);
+    }
+
+**/
 }

@@ -62,4 +62,48 @@ public class RecetaServicioImpl implements RecetaServicio {
 
         return receta.get();
     }
+
+    @Override
+    public Receta registrarRecetaFavoritaUsuario(Receta re)
+    {
+        return recetaRepo.save(re);
+
+
+
+    }
+
+    @Override
+    public List<Receta> listarRecetasFavoritas(String email) throws Exception
+    {
+        Optional<Receta> recetasFav=recetaRepo.obteneRecetasFavoritasUsuario(email);
+
+        if(recetasFav.isEmpty())
+        {
+            throw new Exception("No tiene recetas favoritas agregadas");
+        }
+
+        return (List<Receta>) recetasFav.get();
+    }
+
+    @Override
+    public void eliminarRecetasFavoritasUsuario(String email) throws Exception {
+        Optional<Receta> recetasFav=recetaRepo.obteneRecetasFavoritasUsuario(email);
+
+        if(recetasFav.isEmpty())
+        {
+            throw new Exception("No tiene recetas favoritas agregadas");
+        }else{
+            recetaRepo.eliminarRecetasFavoritasUsuario(email);
+        }
+
+    }
+
+    @Override
+    public Receta actualizarRecetaFavorita(Receta receta) throws Exception {
+
+
+        return  recetaRepo.save(receta);
+    }
+
+
 }

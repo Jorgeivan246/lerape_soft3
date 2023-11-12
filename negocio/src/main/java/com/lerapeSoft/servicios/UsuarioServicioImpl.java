@@ -1,5 +1,6 @@
 package com.lerapeSoft.servicios;
 
+import com.lerapeSoft.entidades.Receta;
 import com.lerapeSoft.entidades.Usuario;
 import com.lerapeSoft.repositorios.UsuarioRepo;
 import org.springframework.stereotype.Service;
@@ -77,4 +78,17 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     public List<Usuario> listarUsuario() {
         return usuarioRepo.findAll();
     }
+
+
+
+
+/**
+
+    @Override
+    public List<Receta> obtenerRecetasRecomendadas(String email)
+    {
+        return  usuarioRepo.obtenerRecetasRecomendadas(email);
+    }
+
+    **/
 }

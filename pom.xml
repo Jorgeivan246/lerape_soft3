@@ -18,7 +18,7 @@
 		<module>persistencia</module>
 
 		<module>negocio</module>
-		<module>negocio</module>
+
 
     </modules>
 	<properties>
